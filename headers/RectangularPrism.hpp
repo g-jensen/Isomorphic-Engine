@@ -5,13 +5,13 @@
 #include <SFML/System/Vector3.hpp>
 #include <SFML/Graphics/Color.hpp>
 
-#include "../headers/utils.hpp"
+#include "utils.hpp"
+#include "Entity.hpp"
 
-class RectangularPrism {
+class RectangularPrism: public Entity {
 public:
-    sf::Vector3f position;
-    sf::Vector3f size;
     sf::Texture* texture;
+    sf::Vector3f size;
     
     // Initialize RectangularPrism
     RectangularPrism(sf::Vector3f pos, sf::Vector3f size);

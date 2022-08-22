@@ -7,25 +7,18 @@ sf::Vector2f world_to_screen(sf::Vector3f pos) {
     return v;
 }
 
-void init_axes(sf::VertexArray& x_axis, sf::VertexArray& y_axis, sf::VertexArray& z_axis) {
-
-    x_axis = sf::VertexArray(sf::Lines,2);
-    y_axis = sf::VertexArray(sf::Lines,2);
-    z_axis = sf::VertexArray(sf::Lines,2);
-
-    sf::Vertex origin({origin_x,origin_y},sf::Color::Green);
-
-    x_axis[0] = origin;
-    origin.color = sf::Color::Yellow;
-    y_axis[0] = origin;
-    origin.color = sf::Color::Red;
-    z_axis[0] = origin;
-
+void init_axes(Line& x_axis, Line& y_axis, Line& z_axis) {
     float r = 200;
 
-    x_axis[1] = {{origin_x+r*cos_7PI_6,origin_y+r*-sin_7PI_6},sf::Color::Green};
-    y_axis[1] = {{origin_x+r*cos_PI_6,origin_y+r*sin_PI_6},sf::Color::Yellow};
-    z_axis[1] = {{origin_x,origin_y-r},sf::Color::Red};
+    x_axis = Line({0,0,0},{r,0,0});
+    x_axis.points[0].color = sf::Color::Green;
+    x_axis.points[1].color = sf::Color::Green;
+    y_axis = Line({0,0,0},{0,r,0});
+    y_axis.points[0].color = sf::Color::Yellow;
+    y_axis.points[1].color = sf::Color::Yellow;
+    z_axis = Line({0,0,0},{0,0,r});
+    z_axis.points[0].color = sf::Color::Red;
+    z_axis.points[1].color = sf::Color::Red;
 }
 
 float distance(sf::Vector3f v1, sf::Vector3f v2) {

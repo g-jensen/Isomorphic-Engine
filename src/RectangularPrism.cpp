@@ -25,6 +25,8 @@ RectangularPrism::RectangularPrism(sf::Vector3f position, sf::Vector3f size) {
     quads[1] = sf::VertexArray(sf::Quads,4);
     quads[2] = sf::VertexArray(sf::Quads,4);
 
+    entities.push_back((Entity*)this);
+
     update();
 
 }
