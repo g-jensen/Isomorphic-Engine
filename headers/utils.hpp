@@ -19,14 +19,8 @@
 #include <SFML/System/Vector3.hpp>
 #include <math.h>
 
-#include "defs.hpp"
-#include "Line.hpp"
-
 // Converts 3D world coordinates to 2D screen coordinates
 sf::Vector2f world_to_screen(sf::Vector3f pos);
-
-// Initializes x, y, and z axes
-void init_axes(Line& x_axis, Line& y_axis, Line& z_axis);
 
 // Returns the euclidean distance between two 3D vectors
 float distance(sf::Vector3f v1, sf::Vector3f v2);

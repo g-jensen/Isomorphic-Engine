@@ -8,7 +8,7 @@ Line::Line(sf::Vector3f p1, sf::Vector3f p2) {
     points[1] = world_to_screen(p2);
     position = p1;
     
-    Entity::entities.push_back((Entity*)this);
+    Entity::entities.push_back(this);
 }
 
 void Line::draw(sf::RenderWindow& window) {

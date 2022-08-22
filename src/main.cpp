@@ -19,16 +19,12 @@ int main() {
     sf::RenderWindow window(mode,"hello");
     sf::Event event;
 
-    const sf::Vector3f camera_position = {333.33333,333.33333,333.33333};
-    const float camera_distance = 1000.0f;
-
-    Line x_axis, y_axis, z_axis;
-    init_axes(x_axis,y_axis,z_axis);
-
+    Line x_axis({0,0,0},{200,0,0});
+    Line y_axis({0,0,0},{0,200,0});
+    Line z_axis({0,0,0},{0,0,200});
+    
     RectangularPrism rec1({0,0,0},{50,50,100});
     RectangularPrism rec2({0,0,0},{50,100,50});
-
-    Entity* e = &rec1;
 
     sf::Texture texture;
     texture.loadFromFile("resources/face.png");
@@ -55,11 +51,11 @@ int main() {
         
         window.clear(sf::Color::Black);
 
-        x_axis.draw(window);
-        y_axis.draw(window);
-        z_axis.draw(window);
-        rec1.draw(window);
-        rec2.draw(window);
+        for (auto e: Entity::entities) {
+            if (e != nullptr) {
+                e->draw(window);
+            }
+        }
 
         window.display();
     }

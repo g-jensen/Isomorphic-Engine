@@ -5,7 +5,6 @@
 #include <SFML/System/Vector3.hpp>
 #include <SFML/Graphics/Color.hpp>
 
-#include "defs.hpp"
 #include "utils.hpp"
 #include "Entity.hpp"
 
