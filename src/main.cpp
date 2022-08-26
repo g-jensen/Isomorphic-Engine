@@ -15,6 +15,8 @@
 #include "../headers/Line.hpp"
 #include "../headers/Plane.hpp"
 
+extern sf::Clock dt;
+
 int main() {
     sf::VideoMode mode = {WINDOW_X, WINDOW_Y, 32};
     sf::RenderWindow window(mode,"hello");
@@ -39,10 +41,12 @@ int main() {
     
     float t = 0.0;
 
+    dt.restart();
+
     while (window.isOpen()) {
         window.setFramerateLimit(60);
 
-        t += 0.01;
+        t += dt.getElapsedTime().asSeconds();
 
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -81,6 +85,7 @@ int main() {
         }
 
         window.display();
+        dt.restart();
     }
     for (auto e: Entity::entities) {
         delete e;

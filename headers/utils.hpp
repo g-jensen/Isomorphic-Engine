@@ -14,10 +14,12 @@
 #define cos_PI_6 0.86602540378f
 #define sin_PI_6 0.5f
 
+#include <math.h>
+
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Vector3.hpp>
-#include <math.h>
+#include <SFML/System/Clock.hpp>
 
 // Converts 3D world coordinates to 2D screen coordinates
 sf::Vector2f world_to_screen(sf::Vector3f pos);
