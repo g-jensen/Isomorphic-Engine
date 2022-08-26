@@ -27,6 +27,8 @@ RectangularPrism::RectangularPrism(sf::Vector3f position, sf::Vector3f size) {
 
     entities.push_back(this);
 
+    texture = nullptr;
+
     update();
 
 }

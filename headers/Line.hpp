@@ -13,5 +13,7 @@ public:
     sf::VertexArray points;
     Line();
     Line(sf::Vector3f p1, sf::Vector3f p2);
+    
+    // Draws the line
     void draw(sf::RenderWindow& window);
 };

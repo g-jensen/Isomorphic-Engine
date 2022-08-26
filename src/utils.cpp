@@ -1,5 +1,7 @@
 #include "../headers/utils.hpp"
 
+sf::Vector3f camera_position = {555.555,555.555,555.555};
+
 sf::Vector2f world_to_screen(sf::Vector3f pos) {
     sf::Vector2f v;
     v.x = origin_x + (pos.x*cos_7PI_6) + (pos.y*cos_PI_6);
