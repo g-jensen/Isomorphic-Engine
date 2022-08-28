@@ -27,7 +27,9 @@ RectangularPrism::RectangularPrism(sf::Vector3f position, sf::Vector3f size) {
 
     entities.push_back(this);
 
-    texture = nullptr;
+    texture_array[0] = nullptr;
+    texture_array[1] = nullptr;
+    texture_array[2] = nullptr;
 
     update();
 
@@ -35,13 +37,18 @@ RectangularPrism::RectangularPrism(sf::Vector3f position, sf::Vector3f size) {
 
 void RectangularPrism::draw(sf::RenderWindow& window) {
     update();
-    if (texture != nullptr) {
-        window.draw(quads[0],texture);
-        window.draw(quads[1],texture);
-        window.draw(quads[2],texture);
-    } else {
+    if (texture_array[0] != nullptr)
+        window.draw(quads[0],texture_array[0]);
+    else
         window.draw(quads[0]);
+
+    if (texture_array[1] != nullptr)
+        window.draw(quads[1],texture_array[1]);
+    else
         window.draw(quads[1]);
+
+    if (texture_array[2] != nullptr)
+        window.draw(quads[2],texture_array[2]);
+    else
         window.draw(quads[2]);
-    }
 }

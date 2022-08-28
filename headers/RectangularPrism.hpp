@@ -10,7 +10,7 @@
 
 class RectangularPrism: public Entity {
 public:
-    sf::Texture* texture;
+    sf::Texture* texture_array[3];
     sf::Vector3f size;
     
     // Initialize RectangularPrism

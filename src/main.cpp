@@ -22,6 +22,8 @@ int main() {
     sf::RenderWindow window(mode,"hello");
     sf::Event event;
 
+    
+
     RectangularPrism* player = new RectangularPrism({100,0,0},{50,50,50});
 
     Plane* plane = new Plane({-200,-200,0},{400,400});
@@ -32,7 +34,9 @@ int main() {
     for(auto e: Entity::entities) {
         if (typeid(*e) == typeid(RectangularPrism)) {
             RectangularPrism* p = (RectangularPrism*)e;
-            p->texture = &texture;
+            p->texture_array[0] = &texture;
+            p->texture_array[1] = &texture;
+            p->texture_array[2] = &texture;
         } else if(typeid(*e) == typeid(Plane)) {
             Plane* p = (Plane*)e;
             p->texture = &texture;
@@ -87,6 +91,7 @@ int main() {
         window.display();
         dt.restart();
     }
+    
     for (auto e: Entity::entities) {
         delete e;
     }
