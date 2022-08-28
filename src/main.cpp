@@ -14,6 +14,7 @@
 #include "../headers/RectangularPrism.hpp"
 #include "../headers/Line.hpp"
 #include "../headers/Plane.hpp"
+#include "../headers/Camera.hpp"
 
 extern sf::Clock dt;
 
@@ -22,7 +23,7 @@ int main() {
     sf::RenderWindow window(mode,"hello");
     sf::Event event;
 
-    
+    Camera camera(window.getView());
 
     RectangularPrism* player = new RectangularPrism({100,0,0},{50,50,50});
 
@@ -31,6 +32,7 @@ int main() {
     sf::Texture texture;
     texture.loadFromFile("resources/face.png");
     
+    // load textures
     for(auto e: Entity::entities) {
         if (typeid(*e) == typeid(RectangularPrism)) {
             RectangularPrism* p = (RectangularPrism*)e;
@@ -53,32 +55,27 @@ int main() {
         t += dt.getElapsedTime().asSeconds();
 
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+            if (event.type == sf::Event::Closed)
                 window.close();
-            }
             if (event.type == sf::Event::KeyPressed) {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
                     player->position.x -= 50;
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
                     player->position.x += 50;
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
                     player->position.y -= 50;
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
                     player->position.y += 50;
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
                     player->position.z += 50;
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) 
                     player->position.z -= 50;
-                }
             }
         }
 
-        
+        camera.set_center(world_to_screen(player->position));
+
+        camera.update_window(window);
         window.clear(sf::Color::Black);
 
         Entity::entities = Entity::reorder_entities(Entity::entities);
