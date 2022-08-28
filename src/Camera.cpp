@@ -17,7 +17,7 @@ void Camera::set_position(sf::Vector2f position) {
 }
 
 void Camera::move(sf::Vector2f delta) {
-    this->position += delta;
+    set_position(get_position()+delta);
 }
 
 sf::Vector2f Camera::get_center() {
