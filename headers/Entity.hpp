@@ -14,7 +14,9 @@ extern sf::Vector3f camera_position;
 class Entity {
 public:
     sf::Vector3f position;
+    bool do_collision;
     virtual void draw(sf::RenderWindow& window) = 0;
+    
 
     static std::vector<Entity*> entities;
 

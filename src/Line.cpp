@@ -8,6 +8,8 @@ Line::Line(sf::Vector3f p1, sf::Vector3f p2) {
     points[1] = world_to_screen(p2);
     position = p1;
     
+    this->do_collision = false;
+    
     Entity::entities.push_back(this);
 }
 

@@ -25,9 +25,11 @@ int main() {
 
     Camera camera(window.getView());
 
-    RectangularPrism* player = new RectangularPrism({100,0,0},{50,50,50});
+    RectangularPrism* player = new RectangularPrism({0,0,1},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
+    player->do_collision = true;
 
-    Plane* plane = new Plane({-200,-200,0},{400,400});
+    Plane* plane = new Plane({-PANEL_SIZE*3,-PANEL_SIZE*3,0},{PANEL_SIZE*7,PANEL_SIZE*7});
+    plane->do_collision;
 
     sf::Texture texture;
     texture.loadFromFile("resources/face.png");
@@ -59,17 +61,17 @@ int main() {
                 window.close();
             if (event.type == sf::Event::KeyPressed) {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
-                    player->position.x -= 50;
+                    player->position.x -= PANEL_SIZE;
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
-                    player->position.x += 50;
+                    player->position.x += PANEL_SIZE;
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
-                    player->position.y -= 50;
+                    player->position.y -= PANEL_SIZE;
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
-                    player->position.y += 50;
+                    player->position.y += PANEL_SIZE;
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
-                    player->position.z += 50;
+                    player->position.z += PANEL_SIZE;
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) 
-                    player->position.z -= 50;
+                    player->position.z -= PANEL_SIZE;
             }
         }
 

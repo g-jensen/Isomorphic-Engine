@@ -20,6 +20,7 @@ void RectangularPrism::update() {
 RectangularPrism::RectangularPrism(sf::Vector3f position, sf::Vector3f size) {
     this->position = position;
     this->size = size;
+    this->do_collision = false;
 
     quads[0] = sf::VertexArray(sf::Quads,4);
     quads[1] = sf::VertexArray(sf::Quads,4);

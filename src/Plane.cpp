@@ -3,6 +3,7 @@
 Plane::Plane(sf::Vector3f position, sf::Vector2f size) {
     this->position = position;
     this->size = size;
+    this->do_collision = false;
 
     texture = nullptr;
 
