@@ -11,10 +11,14 @@
 class RectangularPrism: public Entity {
 public:
     sf::Texture* texture_array[3];
-    sf::Vector3f size;
     
     // Initialize RectangularPrism
     RectangularPrism(sf::Vector3f pos, sf::Vector3f size);
+
+    void set_position(sf::Vector3f position);
+
+    sf::Vector3f get_size();
+    void set_size(sf::Vector3f size);
 
     // Updates position of quads based on the position of the world
     void update();
@@ -23,5 +27,6 @@ public:
     void draw(sf::RenderWindow& window);
 
 private:
+    sf::Vector3f size;
     sf::VertexArray quads[3];
 };

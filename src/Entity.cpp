@@ -45,3 +45,11 @@ std::vector<Entity*> Entity::reorder_entities(std::vector<Entity*> e) {
 
     return reorder_entities_recursive(a,b);
 }
+
+sf::Vector3f Entity::get_position() {
+    return position;
+}
+
+void Entity::move(sf::Vector3f delta) {
+    set_position(get_position() + delta);
+}

@@ -32,12 +32,31 @@ RectangularPrism::RectangularPrism(sf::Vector3f position, sf::Vector3f size) {
     texture_array[1] = nullptr;
     texture_array[2] = nullptr;
 
+    hitbox.origin = position;
+    hitbox.size = size;
+
     update();
 
 }
 
-void RectangularPrism::draw(sf::RenderWindow& window) {
+void RectangularPrism::set_position(sf::Vector3f position) {
+    this->position = position;
+    hitbox.origin = position;
+
     update();
+}
+
+sf::Vector3f RectangularPrism::get_size() {
+    return this->size;
+}
+
+void RectangularPrism::set_size(sf::Vector3f size) {
+    this->size = size;
+    hitbox.size = size;
+    update();
+}
+
+void RectangularPrism::draw(sf::RenderWindow& window) {
     if (texture_array[0] != nullptr)
         window.draw(quads[0],texture_array[0]);
     else

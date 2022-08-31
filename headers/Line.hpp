@@ -14,6 +14,8 @@ public:
     Line();
     Line(sf::Vector3f p1, sf::Vector3f p2);
     
+    void set_position(sf::Vector3f position);
+
     // Draws the line
     void draw(sf::RenderWindow& window);
 };

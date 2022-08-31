@@ -13,6 +13,10 @@ Line::Line(sf::Vector3f p1, sf::Vector3f p2) {
     Entity::entities.push_back(this);
 }
 
+void Line::set_position(sf::Vector3f position) {
+    points[0] = world_to_screen(position);
+}
+
 void Line::draw(sf::RenderWindow& window) {
     window.draw(points);
 }

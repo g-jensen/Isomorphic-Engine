@@ -15,6 +15,7 @@
 #include "../headers/Line.hpp"
 #include "../headers/Plane.hpp"
 #include "../headers/Camera.hpp"
+#include "../headers/Hitbox.hpp"
 
 extern sf::Clock dt;
 
@@ -27,6 +28,9 @@ int main() {
 
     RectangularPrism* player = new RectangularPrism({0,0,1},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
     player->do_collision = true;
+
+    RectangularPrism* box = new RectangularPrism({0,0,1},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
+    box->do_collision = true;
 
     Plane* plane = new Plane({-PANEL_SIZE*3,-PANEL_SIZE*3,0},{PANEL_SIZE*7,PANEL_SIZE*7});
     plane->do_collision;
@@ -61,21 +65,21 @@ int main() {
                 window.close();
             if (event.type == sf::Event::KeyPressed) {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
-                    player->position.x -= PANEL_SIZE;
+                    player->move({-PANEL_SIZE,0,0});
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
-                    player->position.x += PANEL_SIZE;
+                    player->move({PANEL_SIZE,0,0});
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
-                    player->position.y -= PANEL_SIZE;
+                    player->move({0,-PANEL_SIZE,0});
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
-                    player->position.y += PANEL_SIZE;
+                    player->move({0,PANEL_SIZE,0});
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
-                    player->position.z += PANEL_SIZE;
+                    player->move({0,0,PANEL_SIZE});
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) 
-                    player->position.z -= PANEL_SIZE;
+                    player->move({0,0,-PANEL_SIZE});
             }
         }
 
-        camera.set_center(world_to_screen(player->position));
+        camera.set_center(world_to_screen(player->get_position()));
 
         camera.update_window(window);
         window.clear(sf::Color::Black);
