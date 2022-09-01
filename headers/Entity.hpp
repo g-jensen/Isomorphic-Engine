@@ -6,6 +6,7 @@
 #include <SFML/System/Vector3.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
+#include "defs.hpp"
 #include "utils.hpp"
 #include "Hitbox.hpp"
 

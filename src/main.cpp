@@ -100,7 +100,6 @@ int main() {
                 }
             }
         }
-
         camera.set_center(world_to_screen(player->get_position()));
 
         camera.update_window(window);
@@ -117,10 +116,7 @@ int main() {
         dt.restart();
     }
 
-    for (auto e: Entity::entities) {
-        delete e;
-        e = nullptr;
-    }
+    cleanup_resources();
 
     return 0;
 }

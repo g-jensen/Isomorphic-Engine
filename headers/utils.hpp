@@ -23,8 +23,14 @@
 #include <SFML/System/Vector3.hpp>
 #include <SFML/System/Clock.hpp>
 
+#include "defs.hpp"
+#include "Entity.hpp"
+
 // Converts 3D world coordinates to 2D screen coordinates
 sf::Vector2f world_to_screen(sf::Vector3f pos);
 
 // Returns the euclidean distance between two 3D vectors
 float distance(sf::Vector3f v1, sf::Vector3f v2);
+
+// Frees pointers
+void cleanup_resources();
