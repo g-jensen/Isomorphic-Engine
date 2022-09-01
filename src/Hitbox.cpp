@@ -1,5 +1,12 @@
 #include "../headers/Hitbox.hpp"
 
+Hitbox::Hitbox(){}
+
+Hitbox::Hitbox(sf::Vector3f origin, sf::Vector3f size) {
+    this->origin = origin;
+    this->size = size;
+}
+
 bool Hitbox::intersects(Hitbox hb) {
     sf::IntRect r1;
     sf::IntRect r2;

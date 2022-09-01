@@ -12,10 +12,10 @@
 
 #include "../headers/utils.hpp"
 #include "../headers/RectangularPrism.hpp"
-#include "../headers/Line.hpp"
 #include "../headers/Plane.hpp"
 #include "../headers/Camera.hpp"
 #include "../headers/Hitbox.hpp"
+#include "../headers/Player.hpp"
 
 extern sf::Clock dt;
 
@@ -26,19 +26,22 @@ int main() {
 
     Camera camera(window.getView());
 
-    RectangularPrism* player = new RectangularPrism({0,0,1},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
+    Player* player = new Player({0,PANEL_SIZE,1},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
     player->do_collision = true;
 
-    RectangularPrism* box = new RectangularPrism({0,0,1},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
-    box->do_collision = true;
+    RectangularPrism* box1 = new RectangularPrism({0,-PANEL_SIZE,1},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
+    box1->do_collision = true;
+
+    RectangularPrism* box2 = new RectangularPrism({0,0,1+PANEL_SIZE},{PANEL_SIZE,PANEL_SIZE,PANEL_SIZE});
+    box2->do_collision = true;
 
     Plane* plane = new Plane({-PANEL_SIZE*3,-PANEL_SIZE*3,0},{PANEL_SIZE*7,PANEL_SIZE*7});
-    plane->do_collision;
+    plane->do_collision = true;
 
-    sf::Texture texture;
-    texture.loadFromFile("resources/face.png");
     
     // load textures
+    sf::Texture texture;
+    texture.loadFromFile("resources/face.png");
     for(auto e: Entity::entities) {
         if (typeid(*e) == typeid(RectangularPrism)) {
             RectangularPrism* p = (RectangularPrism*)e;
@@ -60,22 +63,41 @@ int main() {
 
         t += dt.getElapsedTime().asSeconds();
 
+        player->update_collision();
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::KeyPressed) {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) 
-                    player->move({-PANEL_SIZE,0,0});
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
-                    player->move({PANEL_SIZE,0,0});
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
-                    player->move({0,-PANEL_SIZE,0});
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
-                    player->move({0,PANEL_SIZE,0});
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) 
-                    player->move({0,0,PANEL_SIZE});
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) 
-                    player->move({0,0,-PANEL_SIZE});
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                    if (player->can_move_forward()) {
+                        player->move_forward();
+                    }
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                    if (player->can_move_backward()) {
+                        player->move_backward();
+                    }
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                    if (player->can_move_left()) {
+                        player->move_left();
+                    }
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                    if (player->can_move_right()) {
+                        player->move_right();
+                    }
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                    if (player->can_move_up()) {
+                        player->move_up();
+                    }
+                }
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+                    if (player->can_move_down()) {
+                        player->move_down();
+                    }
+                }
             }
         }
 
@@ -94,9 +116,10 @@ int main() {
         window.display();
         dt.restart();
     }
-    
+
     for (auto e: Entity::entities) {
         delete e;
+        e = nullptr;
     }
 
     return 0;

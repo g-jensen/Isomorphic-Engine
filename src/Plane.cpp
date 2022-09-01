@@ -11,15 +11,15 @@ Plane::Plane(sf::Vector3f position, sf::Vector2f size) {
     this->position = position;
     this->size = size;
     this->do_collision = false;
-    this->hitbox.origin = position;
-    this->hitbox.size = {size.x,size.y,0};
+
+    this->hitbox = Hitbox(position,{size.x,size.y,1});
 
     texture = nullptr;
 
     quad = sf::VertexArray(sf::Quads,4);
     update();
 
-    Entity::entities.push_back((Entity*)this);
+    Entity::entities.push_back(this);
 }
 
 void Plane::set_position(sf::Vector3f position) {

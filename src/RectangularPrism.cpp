@@ -32,8 +32,7 @@ RectangularPrism::RectangularPrism(sf::Vector3f position, sf::Vector3f size) {
     texture_array[1] = nullptr;
     texture_array[2] = nullptr;
 
-    hitbox.origin = position;
-    hitbox.size = size;
+    hitbox = Hitbox(position,size);
 
     update();
 
